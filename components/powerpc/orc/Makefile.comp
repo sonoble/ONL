@@ -69,7 +69,7 @@ GLOBAL_CFLAGS += -DORC_CONFIG_INCLUDE_CONSOLE_CLI=1
 GLOBAL_CFLAGS += -DORC_CONFIG_CONSOLE_PROMPT_DEFAULT=\"orc\"
 
 
-GLOBAL_CFLAGS += -g
+GLOBAL_CFLAGS += -g 
 
 GLOBAL_LINK_LIBS += -Wl,--unresolved-symbols=ignore-all # HACK; need to ignore shared for ONLP and object for veth.so
 GLOBAL_LINK_LIBS += $(LIBONLP)

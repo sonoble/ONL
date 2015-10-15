@@ -1,4 +1,4 @@
-FROM debian:7.8
+FROM debian:8.2
 MAINTAINER Rob Sherwood <rob.sherwood@bigswitch.com>
 
 # First round of dependences
@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
         apt-file \
         apt-utils \
         autoconf \
-        automake1.9 \
+        automake \
         autotools-dev \
         bc \
         binfmt-support \
@@ -31,6 +31,7 @@ RUN apt-get update && apt-get install -y \
         flex \
         gcc \
         genisoimage \
+	git \
         ifupdown \
         iproute \
         iputils-ping \
@@ -58,7 +59,7 @@ RUN apt-get update && apt-get install -y \
         procps \
         psmisc \
         python \
-        python \
+        python-debian \
         python-yaml \
         qemu \
         qemu-user-static \
@@ -68,12 +69,11 @@ RUN apt-get update && apt-get install -y \
         squashfs-tools \
         sudo \
         syslinux \
-        texinfo=4.13a.dfsg.1-10 \
+        texinfo \
         traceroute \
-        uboot-mkimage \
+        u-boot-tools \
         vim-tiny \
         wget \
-        xapt \
         zile \
         zip 
 #RUN apt-get insstall binutils-powerpc-linux-gnu libgomp1-powerpc-cross
@@ -88,15 +88,19 @@ RUN apt-get update && apt-get install -y \
 
 RUN echo 'APT::Get::AllowUnauthenticated "true";\nAPT::Get::Assume-Yes "true";' | tee /etc/apt/apt.conf.d/99opennetworklinux && \
     echo "deb http://apt.opennetlinux.org/debian/ unstable main" | tee /etc/apt/sources.list.d/opennetlinux.list && \
+    echo "deb http://http.us.debian.org/debian/ sid main" | tee /etc/apt/sources.list.d/debian-sid.list && \
+    curl http://emdebian.org/tools/debian/emdebian-toolchain-archive.key | sudo apt-key add - && \
+    echo "deb http://emdebian.org/tools/debian/ jessie main" | tee /etc/apt/sources.list.d/embedian-jessie.list && \
     dpkg --add-architecture powerpc && \
     apt-get update && \
     apt-get install -y  \
-        binutils-powerpc-linux-gnu=2.22-7.1 \
-        gcc-4.7-powerpc-linux-gnu \ 
+        binutils-powerpc-linux-gnu \
         libc6-dev-powerpc-cross \
-        libgomp1-powerpc-cross=4.7.2-4  && \
-    xapt -a powerpc libedit-dev ncurses-dev libsensors4-dev libwrap0-dev libssl-dev libsnmp-dev && \
-    update-alternatives --install /usr/bin/powerpc-linux-gnu-gcc powerpc-linux-gnu-gcc /usr/bin/powerpc-linux-gnu-gcc-4.7 10 && \
+	crossbuild-essential-powerpc \
+	cross-gcc-dev \
+        libgomp1-powerpc-cross  && \
+#    xapt -a powerpc libedit-dev ncurses-dev libsensors4-dev libwrap0-dev libssl-dev libsnmp-dev && \
+#    update-alternatives --install /usr/bin/powerpc-linux-gnu-gcc powerpc-linux-gnu-gcc 10 && \
     cp  /usr/include/linux/i2c-dev.h /usr/powerpc-linux-gnu/include/linux/i2c-dev.h && \
     rm /etc/apt/apt.conf.d/docker-* && \
     wget "https://launchpad.net/ubuntu/+source/qemu/1.4.0+dfsg-1expubuntu3/+build/4336762/+files/qemu-user-static_1.4.0%2Bdfsg-1expubuntu3_amd64.deb" && \
