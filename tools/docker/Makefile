@@ -27,7 +27,7 @@ docker_build: docker_check
 
 docker_run: docker_check
 	$(DOCKER) pull opennetworklinux/onl-build:$(IMAGE)
-	$(DOCKER) run --privileged -t -i \
+	$(DOCKER) run --privileged -t \
         -e USER=root \
         -e ONL=$(ONL) \
         -e MAKE_UID=`id -u` \
@@ -37,7 +37,7 @@ docker_run: docker_check
         -h "onl-builder" \
         $(SSH_AGENT) \
         opennetworklinux/onl-build:$(IMAGE) \
-        bash -c '$(ONL)/tools/docker/docker_shell.sh'
+        bash -c '$(ONL)/tools/docker/docker_shell.sh && make onl-x86'
 
 # DANGER - destructively kills all containers and images - DO NOT USE
 docker_nuke_all: docker_check
