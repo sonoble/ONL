@@ -37,7 +37,7 @@ docker_run: docker_check
         -h "onl-builder" \
         $(SSH_AGENT) \
         opennetworklinux/onl-build:$(IMAGE) \
-        bash -c '$(ONL)/tools/docker/docker_shell.sh && make onl-x86'
+        bash -c '$(ONL)/tools/docker/docker_shell.sh'
 
 # DANGER - destructively kills all containers and images - DO NOT USE
 docker_nuke_all: docker_check
