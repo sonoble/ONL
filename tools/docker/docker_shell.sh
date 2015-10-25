@@ -7,10 +7,11 @@
 
 # Create an account with the calling UID and add it to sudo
 if [ ! -z $MAKE_USER ] ; then
-    useradd $MAKE_USER --uid $MAKE_UID
+    useradd $MAKE_USER --uid $MAKE_UID -m
     echo "$MAKE_USER     ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
     chown $MAKE_USER:$MAKE_USER /home/$MAKE_USER /root       # make sure we can write to home dir
-    sudo -u $MAKE_USER ONL=$ONL; make onl-x86
+    sudo -u $MAKE_USER ONL=$ONL bash
 else
-    make onl-x86
+    bash
 fi
+
