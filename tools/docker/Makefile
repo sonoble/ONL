@@ -36,7 +36,7 @@ docker_run: docker_check
         -w $(ONL) $(DNS) \
         -h "onl-builder" \
         $(SSH_AGENT) \
-        sonn/onl_deb8_builder \
+        opennetworklinux/builder8 \
         bash -c $(DOCKER_SHELL)
 
 # DANGER - destructively kills all containers and images - DO NOT USE
