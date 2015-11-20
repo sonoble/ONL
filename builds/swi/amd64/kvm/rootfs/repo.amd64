@@ -1,4 +1,7 @@
-[deb-i386]
-packages=snmpd lm-sensors fancontrol pciutils usbutils mtd-utils kexec-tools i2c-tools module-init-tools isc-dhcp-client ntp wget ethtool localepurge tcpdump telnetd python-pyinotify cpio util-linux dosfstools gnu-fdisk rssh faultd
+[deb-amd64]
+packages=gawk base-files sysvinit-core snmpd lm-sensors fancontrol pciutils usbutils mtd-utils kexec-tools i2c-tools module-init-tools isc-dhcp-client ntp wget ethtool localepurge tcpdump telnetd python-pyinotify cpio util-linux dosfstools rssh u-boot-tools file gdb binutils faultd flex bison folly wangle fbthrift libboost-all-dev libdouble-conversion-dev libssl-dev make zip git autoconf libtool libevent-dev flex bison scons libsnappy1 libsasl2-dev libnuma1 libi2c-dev libcurl4-nss-dev libgflags2 libgoogle-glog0 fboss fboss-py
 source=copy:__DIR__/amd64/ ./
 omitdebsrc=true
+
+
+
