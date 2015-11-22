@@ -134,8 +134,8 @@ def user_recovery_add(password):
 # Add the admin user
 #
 def user_admin_add():
-    useradd(username='admin', uid=0, password=None,
-            shell='/usr/bin/pcli');
+    useradd(username='admin', uid=0, password=onl,
+            shell='/bin/bash');
 
 ############################################################
 #
