@@ -1,0 +1,12 @@
+sudo: required
+
+language: c
+
+services:
+  - docker
+  
+before_script:
+- sed -i 's/ONL bash/ONL\ make onl-x86/' tools/docker/docker_shell.sh
+
+script:
+- make docker DOCKER_INTERACTIVE=''
