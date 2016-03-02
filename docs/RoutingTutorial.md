@@ -65,7 +65,7 @@ If you are on an Ubuntu-based system, you can cut and paste this line:
 
 Download the tutorial 99MB tarball from one of these methods:
 
-1. ONL Website: http://opennetworklinux.org/binaries/routing-tutorial.tgz
+1. ONL Website: http://opennetlinux.org/binaries/routing-tutorial.tgz
 2. Dropbox:     https://www.dropbox.com/sh/9n655wxkbnjw9zv/AADOqSdsSy1cw6-UkZ7YOAMFa?dl=0
 
 Work is in progress to make a docker image and an ISO to ease installation.
