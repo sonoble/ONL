@@ -253,7 +253,7 @@ partition_gpt()
 
   installer_say "Creating 32GiB for ONL boot"
   start=$NEXTBLOCK
-  end=$(( $start + 65535 ))
+  end=$(( $start + 855350 ))
 
   parted -s $DEV unit s mkpart "ONL-BOOT" ext4 ${start}s ${end}s || return 1
   parted $DEV set $MINPART boot on || return 1
@@ -267,7 +267,7 @@ partition_gpt()
   # partitions; 33MiB seems to be large enough
   installer_say "Creating /mnt/flash"
   start=$NEXTBLOCK
-  end=$(( $start + 33 * 1048576 / 512 ))
+  end=$(( $start + 353 * 1048576 / 512 ))
 
   parted -s $DEV unit s mkpart "FLASH" fat32 ${start}s ${end}s || return 1
   mkfs.vfat -n "FLASH" ${DEV}${MINPART}
@@ -279,8 +279,8 @@ partition_gpt()
   installer_say "Allocating remainder for /mnt/flash2"
   start=$NEXTBLOCK
 
-  parted -s $DEV unit s mkpart "FLASH2" fat32 ${start}s "100%" || return 1
-  mkfs.vfat -n "FLASH2" ${DEV}${MINPART}
+  parted -s $DEV unit s mkpart "FLASH2" ext4 ${start}s "100%" || return 1
+  mkfs.ext4 -L "FLASH2" ${DEV}${MINPART}
   FLASH2=${DEV}${MINPART}
 
   return 0
@@ -332,7 +332,7 @@ installer_standard_gpt_install()
       SWIDST="$(basename ${SWISRC})"
     fi
     installer_say "Installing ONL Software Image (${SWIDST})..."
-    mount $FLASH2 "$workdir/mnt"
+    mount -t ext4 $FLASH2 "$workdir/mnt"
     cp "${SWISRC}" "$workdir/mnt/${SWIDST}"
     umount "$workdir/mnt"
   else
